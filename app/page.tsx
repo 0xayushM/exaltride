@@ -1,65 +1,94 @@
-import Image from "next/image";
+import { getFeaturedProducts } from "@/lib/products";
+import { ProductCard } from "@/components/product/ProductCard";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { Header } from "@/components/layout/Header";
 
-export default function Home() {
+export const revalidate = 60; // ISR: revalidate every 60 seconds
+
+export default async function HomePage() {
+  const featuredProducts = await getFeaturedProducts();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <main className="flex-1">
+        <div className="flex flex-col gap-16 pb-16">
+          {/* Hero Section */}
+          <section className="relative flex min-h-[500px] items-center justify-center bg-gradient-to-br from-primary/10 via-primary/5 to-background">
+            <div className="container px-4 text-center">
+              <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+                Welcome to ExaltRide
+              </h1>
+              <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground md:text-xl">
+                Discover premium products for your lifestyle. High-quality, fast delivery, and
+                exceptional customer service.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <Link href="/products">
+                  <Button size="lg" className="gap-2">
+                    Shop Now <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/categories/electronics">
+                  <Button size="lg" variant="outline">
+                    Browse Categories
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* Featured Products */}
+          <section className="container px-4">
+            <div className="mb-8 flex items-center justify-between">
+              <div>
+                <h2 className="text-3xl font-bold tracking-tight">Featured Products</h2>
+                <p className="mt-2 text-muted-foreground">Handpicked items just for you</p>
+              </div>
+              <Link href="/products">
+                <Button variant="ghost" className="gap-2">
+                  View All <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {featuredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </section>
+
+          {/* Categories */}
+          <section className="container px-4">
+            <h2 className="mb-8 text-3xl font-bold tracking-tight">Shop by Category</h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              <Link
+                href="/categories/electronics"
+                className="group relative overflow-hidden rounded-lg bg-muted p-8 transition-shadow hover:shadow-lg"
+              >
+                <h3 className="text-2xl font-semibold">Electronics</h3>
+                <p className="mt-2 text-muted-foreground">Latest gadgets and devices</p>
+                <ArrowRight className="absolute bottom-8 right-8 h-6 w-6 transition-transform group-hover:translate-x-2" />
+              </Link>
+              <Link
+                href="/categories/furniture"
+                className="group relative overflow-hidden rounded-lg bg-muted p-8 transition-shadow hover:shadow-lg"
+              >
+                <h3 className="text-2xl font-semibold">Furniture</h3>
+                <p className="mt-2 text-muted-foreground">Modern and comfortable furniture</p>
+                <ArrowRight className="absolute bottom-8 right-8 h-6 w-6 transition-transform group-hover:translate-x-2" />
+              </Link>
+            </div>
+          </section>
         </div>
       </main>
+      <footer className="border-t py-6">
+        <div className="container px-4 text-center text-sm text-muted-foreground">
+          <p>&copy; {new Date().getFullYear()} ExaltRide. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
