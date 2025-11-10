@@ -1,5 +1,5 @@
 import { TopBar } from "@/components/layout/TopBar";
-import { Header } from "@/components/layout/Header";
+import Header from "@/components/layout/Header";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { CategoriesSection } from "@/components/home/CategoriesSection";
