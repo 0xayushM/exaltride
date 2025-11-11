@@ -29,6 +29,8 @@ export interface Product {
   dimensions_cm?: string;
   is_oem?: boolean;
   is_universal?: boolean;
+  created_at?: string;
+  updated_at?: string;
 }
 
 interface ProductCardProps {
