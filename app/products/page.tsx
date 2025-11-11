@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -16,11 +17,20 @@ import type { Product } from "@/components/product/ProductCard";
 const allProducts = productsData as Product[];
 
 export default function ProductsPage() {
+  const searchParams = useSearchParams();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("featured");
   const [showFilters, setShowFilters] = useState(true);
+
+  // Handle URL category parameter
+  useEffect(() => {
+    const categoryParam = searchParams.get("category");
+    if (categoryParam && !selectedCategories.includes(categoryParam)) {
+      setSelectedCategories([categoryParam]);
+    }
+  }, [searchParams]);
 
   // Get unique brands
   const brands = useMemo(() => {
