@@ -11,33 +11,18 @@ import { Footer } from "@/components/layout/Footer";
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* 1. Navbar */}
       <Header />
-
-      {/* 2. Mini Menubar */}
       <TopBar />
-      
       <main>
-        {/* 3. Carousel */}
-        <HeroCarousel />
-        
-        {/* 4. Featured Products */}
+        <section className="">
+          <HeroCarousel />
+        </section>
         <FeaturedProducts />
-        
-        {/* 5. Shop by Categories */}
         <CategoriesSection />
-        
-        {/* 6. Top Brands */}
         <BrandsSection />
-        
-        {/* 7. Recommendations */}
         <RecommendationsSection />
-        
-        {/* 8. Trending */}
         <TrendingSection />
       </main>
-      
-      {/* 9. Footer */}
       <Footer />
     </div>
   );
