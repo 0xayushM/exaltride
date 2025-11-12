@@ -87,6 +87,7 @@ export async function addToCart(
 
     await saveCart(cart);
     revalidatePath("/");
+    revalidatePath("/cart");
 
     return { success: true, message: "Added to cart" };
   } catch (error) {
