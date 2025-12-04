@@ -9,9 +9,9 @@ export const ApiProductSchema = z.object({
   price: z.number(),
   compare_at_price: z.number().nullable().optional(),
   discount_percentage: z.string().nullable().optional(),
-  rating: z.number(),
-  review_count: z.number(),
-  in_stock: z.boolean(),
+  rating: z.number().optional().default(0),
+  review_count: z.number().optional().default(0),
+  in_stock: z.boolean().optional().default(true),
   brand_name: z.string(),
 });
 
@@ -182,12 +182,12 @@ export async function fetchProductBySlug(slug: string): Promise<Product | null> 
       discount_percentage: validated.discount_percentage
         ? parseFloat(validated.discount_percentage)
         : null,
-      rating: validated.rating,
-      review_count: validated.review_count,
-      in_stock: validated.in_stock,
+      rating: validated.rating ?? 0,
+      review_count: validated.review_count ?? 0,
+      in_stock: validated.in_stock ?? true,
       brand_name: validated.brand_name,
-      stock: validated.in_stock ? 100 : 0,
-      status: validated.in_stock ? "active" : "out_of_stock",
+      stock: (validated.in_stock ?? true) ? 100 : 0,
+      status: (validated.in_stock ?? true) ? "active" : "out_of_stock",
     };
 
     return product;
