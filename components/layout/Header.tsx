@@ -62,7 +62,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center">
               <Image 
-                src="/images/logo.png"
+                src="/images/dark_logo.png"
                 alt="ExaltRide Logo"
                 width={80}     // adjust size based on your design
                 height={10}     // adjust accordingly

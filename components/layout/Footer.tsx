@@ -1,47 +1,43 @@
 import Link from "next/link";
-import { Facebook, Twitter, Linkedin, Instagram, Mail } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#001155] text-white">
-      <div className="container mx-auto px-4 py-8 md:py-12">
-        {/* Logo Section - Centered on Mobile */}
-        <div className="flex flex-col items-center text-center mb-8 md:mb-12">
-          <div className="mb-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">exaltride</h2>
-            <p className="text-xs md:text-sm text-gray-300 tracking-wider">YOUR RIDE. REINVENTED.</p>
+    <footer className="bg-[#000B5C] text-white">
+      <div className="container mx-auto px-4 md:px-8 py-12 md:py-16">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12">
+          {/* Logo Section */}
+          <div className="md:col-span-1">
+            <div className="mb-4">
+              <Image src="/images/logo.png" alt="Exaltride Logo" className="invert" width={150} height={50} className="mb-2" />
+              <p className="text-[10px] md:text-xs text-gray-300 tracking-widest">YOUR RIDE. REINVENTED.</p>
+            </div>
           </div>
-          <p className="text-sm md:text-base text-gray-200 max-w-md">
-            Your trusted destination<br className="md:hidden" />
-            for premium car accessories
-          </p>
-        </div>
-
-        {/* Links Section - Single Column on Mobile, Grid on Desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 pb-8 md:pb-10 border-b border-white/10">
           {/* Quicklinks */}
           <div>
-            <h3 className="text-yellow-400 font-semibold text-base md:text-lg mb-4 flex items-center gap-2">
-              <span className="text-yellow-400">●</span> Quicklinks
+            <h3 className="text-yellow-400 font-semibold text-sm md:text-base mb-4 border-b border-yellow-400 pb-2 inline-block">
+              Quicklinks
             </h3>
-            <ul className="space-y-2 md:space-y-3 pl-5 md:pl-0">
+            <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm md:text-base">
+                <Link href="/" className="text-gray-200 hover:text-yellow-400 transition-colors text-sm">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm md:text-base">
+                <Link href="/products" className="text-gray-200 hover:text-yellow-400 transition-colors text-sm">
                   Products
                 </Link>
               </li>
               <li>
-                <Link href="/products?type=deals" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm md:text-base">
+                <Link href="/products?type=deals" className="text-gray-200 hover:text-yellow-400 transition-colors text-sm">
                   Deals
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm md:text-base">
+                <Link href="#contact" className="text-gray-200 hover:text-yellow-400 transition-colors text-sm">
                   Contact Us
                 </Link>
               </li>
@@ -50,86 +46,84 @@ export default function Footer() {
 
           {/* Help & Policy */}
           <div>
-            <h3 className="text-yellow-400 font-semibold text-base md:text-lg mb-4 flex items-center gap-2">
-              <span className="text-yellow-400">●</span> Help & Policy
+            <h3 className="text-yellow-400 font-semibold text-sm md:text-base mb-4 border-b border-yellow-400 pb-2 inline-block">
+              Help & Policy
             </h3>
-            <ul className="space-y-2 md:space-y-3 pl-5 md:pl-0">
+            <ul className="space-y-2">
               <li>
-                <Link href="#faq" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm md:text-base">
+                <Link href="#faq" className="text-gray-200 hover:text-yellow-400 transition-colors text-sm">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="#shipping" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm md:text-base">
+                <Link href="#shipping" className="text-gray-200 hover:text-yellow-400 transition-colors text-sm">
                   Shipping Policy
                 </Link>
               </li>
               <li>
-                <Link href="#return" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm md:text-base">
+                <Link href="#return" className="text-gray-200 hover:text-yellow-400 transition-colors text-sm">
                   Return Policy
                 </Link>
               </li>
               <li>
-                <Link href="#cancellation" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm md:text-base">
-                  Cancellation Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="#privacy" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm md:text-base">
+                <Link href="#privacy" className="text-gray-200 hover:text-yellow-400 transition-colors text-sm">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#terms" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm md:text-base">
+                <Link href="#terms" className="text-gray-200 hover:text-yellow-400 transition-colors text-sm">
                   Terms & Conditions
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact Us - Hidden on Mobile, shown on Desktop */}
-          <div className="hidden md:block">
-            <h3 className="text-yellow-400 font-semibold text-lg mb-4">Contact Us</h3>
-            <ul className="space-y-3">
+          {/* Contact Us */}
+          <div>
+            <h3 className="text-yellow-400 font-semibold text-sm md:text-base mb-4 border-b border-yellow-400 pb-2 inline-block">
+              Contact Us
+            </h3>
+            <ul className="space-y-2">
               <li>
                 <a
-                  href="mailto:support@exaltride.com"
-                  className="text-gray-300 hover:text-yellow-400 transition-colors text-sm underline"
+                  href="mailto:support@autoessentials.com"
+                  className="text-gray-200 hover:text-yellow-400 transition-colors text-sm block"
                 >
-                  support@exaltride.com
+                  support@autoessentials.com
                 </a>
               </li>
               <li>
                 <a
                   href="tel:1800-123-4567"
-                  className="text-gray-300 hover:text-yellow-400 transition-colors text-sm underline"
+                  className="text-gray-200 hover:text-yellow-400 transition-colors text-sm block"
                 >
                   1800-123-4567
                 </a>
+              </li>
+              <li className="text-gray-200 text-sm leading-relaxed pt-2">
+                502, 5th Floor, Skyline Plaza,<br />
+                MG Road, Bengaluru 560001, India
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Newsletter Section - Hidden on Mobile */}
-        <div className="hidden md:flex py-8 flex-col lg:flex-row items-center justify-between gap-6">
+        {/* Newsletter Section */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 py-8 border-t border-white/20">
           {/* Newsletter Text and Input */}
-          <div className="flex-1 w-full lg:w-auto">
-            <p className="text-gray-300 text-sm mb-4">
+          <div className="flex-1 w-full">
+            <p className="text-gray-200 text-sm mb-3">
               Join our mailing list to stay in the loop with us...
             </p>
-            <form className="flex max-w-md">
-              <div className="relative flex-1">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-l-full bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                />
-              </div>
+            <form className="flex max-w-lg">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-2.5 rounded-l-md bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              />
               <button
                 type="submit"
-                className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-6 py-2.5 rounded-r-full transition-colors text-sm whitespace-nowrap"
+                className="bg-yellow-400 hover:bg-yellow-500 text-[#000B5C] font-semibold px-6 py-2.5 rounded-r-md transition-colors text-sm whitespace-nowrap"
               >
                 Subscribe
               </button>
@@ -137,42 +131,42 @@ export default function Footer() {
           </div>
 
           {/* Social Media Icons */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <a
               href="#"
-              className="bg-yellow-400 hover:bg-yellow-500 p-2.5 rounded-lg transition-colors"
+              className="bg-yellow-400 hover:bg-yellow-500 p-2 rounded-full transition-colors"
               aria-label="Facebook"
             >
-              <Facebook className="h-5 w-5 text-[#001155]" />
+              <Facebook className="h-5 w-5 text-[#000B5C]" fill="currentColor" />
             </a>
             <a
               href="#"
-              className="bg-yellow-400 hover:bg-yellow-500 p-2.5 rounded-lg transition-colors"
+              className="bg-yellow-400 hover:bg-yellow-500 p-2 rounded-full transition-colors"
               aria-label="Twitter"
             >
-              <Twitter className="h-5 w-5 text-[#001155]" />
+              <Twitter className="h-5 w-5 text-[#000B5C]" fill="currentColor" />
             </a>
             <a
               href="#"
-              className="bg-yellow-400 hover:bg-yellow-500 p-2.5 rounded-lg transition-colors"
+              className="bg-yellow-400 hover:bg-yellow-500 p-2 rounded-full transition-colors"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5 text-[#001155]" />
+              <Linkedin className="h-5 w-5 text-[#000B5C]" fill="currentColor" />
             </a>
             <a
               href="#"
-              className="bg-yellow-400 hover:bg-yellow-500 p-2.5 rounded-lg transition-colors"
+              className="bg-yellow-400 hover:bg-yellow-500 p-2 rounded-full transition-colors"
               aria-label="Instagram"
             >
-              <Instagram className="h-5 w-5 text-[#001155]" />
+              <Instagram className="h-5 w-5 text-[#000B5C]" fill="currentColor" />
             </a>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="pt-6 md:pt-6 border-t border-white/10 md:border-t-0">
-          <p className="text-gray-400 text-xs text-center">
-            © 2025 Exaltride. All Rights Reserved.
+        <div className="pt-6 border-t border-white/20">
+          <p className="text-gray-300 text-xs">
+            © 2025 Auto Essentials. All Rights Reserved.
           </p>
         </div>
       </div>

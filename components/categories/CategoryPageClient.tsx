@@ -22,7 +22,7 @@ export default function CategoryPageClient({
 }: {
   category: { id: string; name: string; description?: string; slug: string };
   initialProducts: Product[];
-  subCategories: { id: number; name: string; slug: string }[];
+  subCategories: { id: string; name: string; slug: string }[];
 }) {
   // ---------- FILTER STATE ----------
   const [selectedSubcat, setSelectedSubcat] = useState<string | null>(null);

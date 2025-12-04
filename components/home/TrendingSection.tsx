@@ -3,12 +3,19 @@
 import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import productsData from "@/data/products.json";
 import type { Product } from "@/components/product/ProductCard";
 
-const trendingProducts = productsData.slice(0, 4) as Product[];
+interface TrendingSectionProps {
+  products: Product[];
+}
 
-export function TrendingSection() {
+export function TrendingSection({ products }: TrendingSectionProps) {
+  // Return null if no products available
+  if (!products || products.length === 0) {
+    return null;
+  }
+
+  const trendingProducts = products.slice(0, 4);
   return (
     <section className="bg-gray-50 py-8 md:py-16">
       <div className="container mx-auto px-4">

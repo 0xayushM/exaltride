@@ -43,15 +43,19 @@ export default function PurchaseActions({
       {/* Primary Buttons */}
       <div className="flex gap-2">
         <Button
-          className={`flex-1 bg-yellow-500 text-gray-900 hover:bg-yellow-600`}
+          className={`flex-1 font-semibold ${
+            added
+              ? "bg-green-500 hover:bg-green-600 text-white"
+              : "bg-[#FFC107] hover:bg-[#FFB300] text-gray-900"
+          }`}
           onClick={handleAddToCart}
           disabled={isPending}
         >
-          <ShoppingCart className="h-4 w-4" />
-          {added ? "Added ✓" : "Add to Cart"}
+          <ShoppingCart className="h-4 w-4 mr-2" />
+          {added ? "Added ✓" : "Add to cart"}
         </Button>
 
-        <Button className="flex-1 bg-blue-600 hover:bg-blue-700">
+        <Button className="flex-1 bg-blue-600 hover:bg-blue-700 font-semibold">
           Buy Now
         </Button>
       </div>

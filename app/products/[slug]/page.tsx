@@ -4,7 +4,7 @@ import Header from "@/components/layout/Header";
 import TopBar from "@/components/layout/TopBar";
 import Footer from "@/components/layout/Footer";
 
-import productsData from "@/data/products.json";
+import { fetchProductBySlug, fetchRelatedProducts } from "@/lib/api/products";
 import type { Product } from "@/components/product/ProductCard";
 
 import ProductImages from "@/components/product/ProductImages";
@@ -25,8 +25,8 @@ interface ProductPageProps {
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
 
-  // Find product
-  const product = productsData.find((p) => p.slug === slug) as Product | undefined;
+  // Fetch product from API
+  const product = await fetchProductBySlug(slug);
   if (!product) notFound();
 
   // Discount %

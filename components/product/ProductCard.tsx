@@ -203,12 +203,11 @@ export function ProductCard({
           {/* Action Buttons */}
           <div className="flex gap-1 md:gap-2">
             <Button
-              variant="outline"
               size="sm"
-              className={`flex-1 text-[10px] md:text-sm px-1 md:px-3 py-1 md:py-2 h-7 md:h-9 transition-colors ${
+              className={`flex-1 text-[10px] md:text-sm px-1 md:px-3 py-1 md:py-2 h-7 md:h-9 font-semibold transition-colors ${
                 isAdded
-                  ? "border-green-500 text-green-600 bg-green-50"
-                  : "border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                  ? "bg-green-500 hover:bg-green-600 text-white"
+                  : "bg-[#FFC107] hover:bg-[#FFB300] text-gray-900"
               }`}
               onClick={handleAddToCart}
               disabled={isPending}

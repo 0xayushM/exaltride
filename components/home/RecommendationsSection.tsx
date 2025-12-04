@@ -6,11 +6,19 @@ import { Badge } from "@/components/ui/badge";
 import { Award, ShoppingCart, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import productsData from "@/data/products.json";
 import type { Product } from "@/components/product/ProductCard";
 
-export function RecommendationsSection() {
-  const allProducts = productsData as Product[];
+interface RecommendationsSectionProps {
+  products: Product[];
+}
+
+export function RecommendationsSection({ products }: RecommendationsSectionProps) {
+  const allProducts = products;
+  
+  // Return null if no products available
+  if (!allProducts || allProducts.length === 0) {
+    return null;
+  }
   
   // Get featured product (highest rated)
   const featuredProduct = allProducts.reduce((prev, current) => {
@@ -99,7 +107,7 @@ export function RecommendationsSection() {
 
               {/* Action Buttons - Pushed to bottom */}
               <div className="flex gap-3 mt-auto">
-                <Button className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold gap-2">
+                <Button className="flex-1 bg-[#FFC107] hover:bg-[#FFB300] text-gray-900 font-semibold gap-2">
                   <ShoppingCart className="h-4 w-4" />
                   Add to cart
                 </Button>

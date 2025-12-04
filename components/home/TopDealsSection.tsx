@@ -4,13 +4,27 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import products from "@/data/products.json";
+import type { Product } from "@/components/product/ProductCard";
 
-export function TopDealsSection() {
+interface TopDealsSectionProps {
+  products: Product[];
+}
+
+export function TopDealsSection({ products }: TopDealsSectionProps) {
+  // Return null if no products available
+  if (!products || products.length === 0) {
+    return null;
+  }
+
   // Filter products with a discount (to simulate “Top Deals”)
   const topDeals = products.filter(
     (p) => p.discount_percentage && p.discount_percentage > 0
   );
+
+  // If no deals available, return null
+  if (topDeals.length === 0) {
+    return null;
+  }
 
   return (
     <section id="deals" className="border-t bg-white py-8 md:py-12 scroll-mt-20">

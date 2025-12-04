@@ -20,7 +20,7 @@ export default function MobileFilterDrawer({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  parentCategories: { id: number; name: string; item_count?: number }[];
+  parentCategories: { id: string; name: string; item_count?: number }[];
   selectedBrands: string[];
   toggleBrand: (b: string) => void;
   localRange: [number, number];

@@ -2,29 +2,31 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/button";
 import { LayoutGrid } from "lucide-react";
 import Link from "next/link";
-import productsData from "@/data/products.json";
 import type { Product } from "@/components/product/ProductCard";
 
-const featuredProducts = [
-  {
-    product: productsData[0] as Product,
-    badges: { primary: "Bestseller", secondary: "Limited Deal" },
-  },
-  {
-    product: productsData[3] as Product,
-    badges: { primary: "Top Rated", secondary: "Deal of Day" },
-  },
-  {
-    product: productsData[1] as Product,
-    badges: { primary: "Hot Deal", secondary: "Trending" },
-  },
-  {
-    product: productsData[2] as Product,
-    badges: { primary: "New Launch", secondary: "Popular" },
-  },
-];
+interface FeaturedProductsProps {
+  products: Product[];
+}
 
-export function FeaturedProducts() {
+export function FeaturedProducts({ products }: FeaturedProductsProps) {
+  // Return null if no products available
+  if (!products || products.length === 0) {
+    return null;
+  }
+
+  // Take first 4 products and assign badges
+  const badges = [
+    { primary: "Bestseller", secondary: "Limited Deal" },
+    { primary: "Top Rated", secondary: "Deal of Day" },
+    { primary: "Hot Deal", secondary: "Trending" },
+    { primary: "New Launch", secondary: "Popular" },
+  ];
+
+  const featuredProducts = products.slice(0, 4).map((product, index) => ({
+    product,
+    badges: badges[index] || {},
+  }));
+
   return (
     <section className="border-t bg-white py-8 md:py-12">
       <div className="container mx-auto px-4">

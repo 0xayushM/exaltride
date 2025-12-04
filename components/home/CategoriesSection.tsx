@@ -5,9 +5,13 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useMemo } from "react";
 import categoriesData from "@/data/categories.json";
-import productsData from "@/data/products.json";
+import type { Product } from "@/components/product/ProductCard";
 
-export function CategoriesSection() {
+interface CategoriesSectionProps {
+  products: Product[];
+}
+
+export function CategoriesSection({ products }: CategoriesSectionProps) {
   // Get only top-level categories
   const topCategories = categoriesData.filter((c) => c.level === 0);
 
@@ -15,7 +19,7 @@ export function CategoriesSection() {
   const categoryData = useMemo(() => {
     return topCategories.slice(0, 3).map((category, index) => {
       // Get products for this category
-      const categoryProducts = productsData.filter(
+      const categoryProducts = products.filter(
         (p) => p.category_id === category.id
       );
 
