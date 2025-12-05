@@ -10,9 +10,53 @@ import { User, Tag, Menu, X, ShoppingBag, MapPin, Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CarSelector from "./CarSelector";
 import { CartBadge } from "@/components/cart/CartBadge";
+<<<<<<< Updated upstream
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+=======
+import CartSidebar from "@/components/cart/CartSidebar";
+import { AuthDialog } from "@/components/auth/AuthDialog";
+import { UserMenu } from "@/components/auth/UserMenu";
+import { useAuthStore } from "@/lib/stores/auth-store";
+
+export default function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [cartCount, setCartCount] = useState(0);
+  const { isAuthenticated } = useAuthStore();
+
+  // Load cart data from API
+  useEffect(() => {
+    const loadCart = async () => {
+      try {
+        const response = await fetch("/api/cart");
+        if (response.ok) {
+          const data = await response.json();
+          setCartItems(data.items || []);
+          setCartCount(data.count || 0);
+        }
+      } catch (error) {
+        console.error("Error loading cart:", error);
+      }
+    };
+    loadCart();
+
+    // Poll for cart updates every 2 seconds
+    const interval = setInterval(loadCart, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Smooth scroll to deals section
+  const scrollToDeals = () => {
+    const dealsSection = document.getElementById("deals");
+    if (dealsSection) {
+      dealsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+>>>>>>> Stashed changes
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
@@ -36,12 +80,27 @@ export default function Header() {
           <div className="flex items-center gap-5">
             <LocationSelector />
 
+<<<<<<< Updated upstream
             <div className="flex items-center gap-10">
               {/* Login */}
               <button className="flex flex-col items-center justify-center text-gray-700 hover:text-gray-900 transition-colors">
                 <User size={22} className="mb-1" />
                 <span className="text-sm font-medium">Login</span>
               </button>
+=======
+            <div className="flex items-center gap-5">
+              {/* Login / User Menu */}
+              {isAuthenticated ? (
+                <UserMenu />
+              ) : (
+                <button
+                  onClick={() => setIsAuthOpen(true)}
+                  className="flex flex-col items-center justify-center text-gray-700 hover:text-gray-900 transition-colors"
+                >
+                  <User size={22} className="mb-1" />
+                </button>
+              )}
+>>>>>>> Stashed changes
 
               {/* Cart */}
               <Link href="/cart">
@@ -121,11 +180,23 @@ export default function Header() {
 
               {/* Menu Items */}
               <nav className="space-y-4">
-                {/* Login */}
-                <button className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-                  <User size={20} />
-                  <span className="font-medium">Login / Sign Up</span>
-                </button>
+                {/* Login / User Info */}
+                {isAuthenticated ? (
+                  <div className="px-4 py-3">
+                    <UserMenu />
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setIsAuthOpen(true);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                  >
+                    <User size={20} />
+                    <span className="font-medium">Login / Sign Up</span>
+                  </button>
+                )}
 
                 {/* Add Car */}
                 <div className="px-4 py-3">
@@ -167,6 +238,19 @@ export default function Header() {
           </div>
         </>
       )}
+<<<<<<< Updated upstream
+=======
+
+      {/* Cart Sidebar */}
+      <CartSidebar
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        items={cartItems}
+      />
+
+      {/* Auth Dialog */}
+      <AuthDialog isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
+>>>>>>> Stashed changes
     </header>
   );
 }
