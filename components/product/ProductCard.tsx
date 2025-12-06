@@ -156,7 +156,7 @@ export function ProductCard({
           </h3>
 
           {/* Rating */}
-          {product.rating && (
+          {/* {product.rating && product.rating > 0 && (
             <div className="mb-2 md:mb-3 flex items-center gap-1 md:gap-2">
               <div className="flex items-center gap-0.5 md:gap-1 rounded bg-blue-600 px-1 md:px-2 py-0.5">
                 <span className="text-[10px] md:text-xs font-semibold text-white">
@@ -168,7 +168,7 @@ export function ProductCard({
                 ({(product.review_count || 0).toLocaleString()})
               </span>
             </div>
-          )}
+          )} */}
 
           {/* Price */}
           <div className="mb-1 md:mb-2 flex items-baseline gap-1 md:gap-2">

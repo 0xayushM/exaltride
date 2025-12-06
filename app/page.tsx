@@ -47,7 +47,7 @@ export default async function HomePage() {
       <main>
         <HeroCarousel />
         <FeaturedProducts products={displayFeatured} />
-        <CategoriesSection products={[...displayFeatured, ...displayDeals]} />
+        <CategoriesSection />
         <BrandsSection />
         <TopDealsSection products={displayDeals} />
         <RecommendationsSection products={displayBestRated} />

@@ -6,15 +6,17 @@ import Link from "next/link";
 import SearchBar from "./SearchBar";
 import LocationSelector from "./LocationSelector";
 import CartIcon from "./CartIcon";
-import { User, Tag, Menu, X, ShoppingBag, MapPin, Car } from "lucide-react";
+import { User, Tag, Menu, X, ShoppingBag, MapPin, Car, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CarSelector from "./CarSelector";
 import { CartBadge } from "@/components/cart/CartBadge";
 // import CartSidebar from "@/components/cart/CartSidebar";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/auth/context";
 
 export default function Header() {
   const router = useRouter();
+  const { user, isAuthenticated, logout } = useAuth();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // const [isCartOpen, setIsCartOpen] = useState(false);
@@ -85,10 +87,30 @@ export default function Header() {
             <LocationSelector />
 
             <div className="flex items-center gap-5">
-              {/* Login */}
-              <button className="flex flex-col items-center justify-center text-gray-700 hover:text-gray-900 transition-colors">
-                <User size={22} className="mb-1" />
-              </button>
+              {/* Login/Profile */}
+              {isAuthenticated ? (
+                <div className="flex items-center gap-3">
+                  <div className="flex flex-col items-end">
+                    <span className="text-sm font-medium text-gray-900">{user?.name}</span>
+                    <span className="text-xs text-gray-500 capitalize">{user?.role}</span>
+                  </div>
+                  <button
+                    onClick={logout}
+                    className="flex flex-col items-center justify-center text-gray-700 hover:text-red-600 transition-colors"
+                    title="Logout"
+                  >
+                    <LogOut size={22} className="mb-1" />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => router.push("/auth/login")}
+                  className="flex flex-col items-center justify-center text-gray-700 hover:text-gray-900 transition-colors"
+                >
+                  <User size={22} className="mb-1" />
+                  <span className="text-xs">Login</span>
+                </button>
+              )}
 
               {/* Cart */}
               <button
@@ -180,11 +202,39 @@ export default function Header() {
 
               {/* Menu Items */}
               <nav className="space-y-4">
-                {/* Login */}
-                <button className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-                  <User size={20} />
-                  <span className="font-medium">Login / Sign Up</span>
-                </button>
+                {/* Login/Profile */}
+                {isAuthenticated ? (
+                  <div className="px-4 py-3 bg-gray-50 rounded-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <div>
+                        <p className="font-medium text-gray-900">{user?.name}</p>
+                        <p className="text-sm text-gray-500 capitalize">{user?.role}</p>
+                      </div>
+                      <User size={20} className="text-gray-400" />
+                    </div>
+                    <button
+                      onClick={() => {
+                        logout();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="w-full mt-2 flex items-center justify-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    >
+                      <LogOut size={16} />
+                      <span>Logout</span>
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      router.push("/auth/login");
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                  >
+                    <User size={20} />
+                    <span className="font-medium">Login / Sign Up</span>
+                  </button>
+                )}
 
                 {/* Add Car */}
                 <div className="px-4 py-3">
